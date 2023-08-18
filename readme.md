@@ -39,4 +39,4 @@ This application provides a simple backend service to manage users and their res
 
 ## Deployment
 
-The project has been successfully deployed using Cyclic and Railway for database. You can access the production version of the website by following this link: [https://shy-red-belt.cyclic.cloud/](https://shy-red-belt.cyclic.cloud/).
+The project has been successfully deployed using Cyclic and Railway for Database. You can access the production version of the website by following this link: [https://shy-red-belt.cyclic.cloud/](https://shy-red-belt.cyclic.cloud/).

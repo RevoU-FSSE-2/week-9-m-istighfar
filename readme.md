@@ -21,7 +21,7 @@ This project provides a RESTful API built using Express.js and MySQL for managin
 
 - Transactions Table
 
-  ![trans](trans.png)
+![trans](trans.png)
 
 ## API Endpoints
 

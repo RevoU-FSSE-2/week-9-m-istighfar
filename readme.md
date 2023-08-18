@@ -16,9 +16,11 @@ This project provides a RESTful API built using Express.js and MySQL for managin
 ## Creating Database Table
 
 - Users Table
-  ![users](users.png)
+
+![users](users.png)
 
 - Transactions Table
+
   ![trans](trans.png)
 
 ## API Endpoints

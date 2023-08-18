@@ -19,11 +19,11 @@ const commonResponse = function (data, error) {
 };
 
 const mysqlCon = mysql.createConnection({
-  host: "localhost",
-  port: "3306",
+  host: "containers-us-west-137.railway.app",
+  port: "7771",
   user: "root",
-  password: "1234",
-  database: "revouw9",
+  password: "1ZyciMOL2UsHkn0SIis5M",
+  database: "railway",
 });
 
 mysqlCon.connect((err) => {

@@ -22,7 +22,7 @@ const mysqlCon = mysql.createConnection({
   host: "containers-us-west-137.railway.app",
   port: "7771",
   user: "root",
-  password: "1ZyciMOL2UsHkn0SIis5M",
+  password: "ZyciMOL2UsHkn0SIis5M",
   database: "railway",
 });
 

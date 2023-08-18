@@ -1,12 +1,13 @@
 # Express MySQL API
 
-This project provides a RESTful API built using Express.js and MySQL for managing users and their transactions.
+This application provides a simple backend service to manage users and their respective transactions. The data is stored in a MySQL database and exposes several endpoints to interact with the data.
 
-## Features
+## Tech Stack
 
-- Fetch details of all users.
-- Retrieve a specific user's details, including a summary of their balance and expenses.
-- Manage transactions for users: create, update, and delete transactions.
+- Javascript
+- Node.js
+- Express.js
+- MySQL as Databse
 
 ## Prerequisites
 
@@ -35,3 +36,7 @@ This project provides a RESTful API built using Express.js and MySQL for managin
 | `/transaction`          | POST   | Adds a new transaction.                                                                | `user_id`: User ID, `type`: Transaction Type, `amount`: Amount  |
 | `/transaction/:id`      | PUT    | Updates a specific transaction by its ID.                                              | `id`: Transaction ID + Body Params: `user_id`, `type`, `amount` |
 | `/transaction/:id`      | DELETE | Deletes a specific transaction by its ID.                                              | `id`: Transaction ID                                            |
+
+## Deployment
+
+The project has been successfully deployed using Cyclic. You can access the production version of the website by following this link: []().

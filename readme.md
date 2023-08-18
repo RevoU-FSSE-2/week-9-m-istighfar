@@ -36,7 +36,8 @@ This application provides a simple backend service to manage users and their res
 | `/transaction`          | POST   | Adds a new transaction.                                                                | `user_id`: User ID, `type`: Transaction Type, `amount`: Amount  |
 | `/transaction/:id`      | PUT    | Updates a specific transaction by its ID.                                              | `id`: Transaction ID + Body Params: `user_id`, `type`, `amount` |
 | `/transaction/:id`      | DELETE | Deletes a specific transaction by its ID.                                              | `id`: Transaction ID                                            |
+| `/users/:id`            | DELETE | Deletes a specific user by its ID.                                                     | `id`: User ID                                                   |
 
 ## Deployment
 
-The project has been successfully deployed using Cyclic. You can access the production version of the website by following this link: []().
+The project has been successfully deployed using Cyclic and Railway for database. You can access the production version of the website by following this link: [https://shy-red-belt.cyclic.cloud/](https://shy-red-belt.cyclic.cloud/).

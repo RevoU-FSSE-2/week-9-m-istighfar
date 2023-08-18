@@ -19,11 +19,11 @@ const commonResponse = function (data, error) {
 };
 
 const mysqlCon = mysql.createConnection({
-  host: "containers-us-west-137.railway.app",
-  port: "7771",
+  host: "localhost",
+  port: "3306",
   user: "root",
-  password: "ZyciMOL2UsHkn0SIis5M",
-  database: "railway",
+  password: "1234",
+  database: "revouw9",
 });
 
 mysqlCon.connect((err) => {
@@ -98,7 +98,7 @@ app.get("/users/:id", (request, response) => {
       return;
     }
 
-    response.status(200).json(result[0]);
+    response.status(200).json(commonResponse(result[0], null));
     response.end();
   });
 });
@@ -159,7 +159,7 @@ app.get("/transaction/:id", (request, response) => {
     if (result.length === 0) {
       response
         .status(404)
-        .json(commonResponse(null, "transaction tidak ditemukan"));
+        .json(commonResponse(null, "Transaksi tidak ditemukan"));
       response.end();
       return;
     }
@@ -186,7 +186,7 @@ app.post("/transaction", (request, response) => {
         response.end();
         return;
       }
-      response.status(200).json({ id: result.insertId });
+      response.status(200).json({ success: "true", id: result.insertId });
       response.end();
     }
   );
@@ -222,10 +222,33 @@ app.put("/transaction/:id", (request, response) => {
         return;
       }
 
-      response.status(200).json({ id: id });
+      response.status(200).json({ success: "true", id: id });
       response.end();
     }
   );
+});
+
+app.delete("/users/:id", (request, response) => {
+  const id = request.params.id;
+  const query = `DELETE FROM users WHERE id = ?`;
+
+  mysqlCon.query(query, id, (err, result, fields) => {
+    if (err) {
+      console.error(err);
+      response.status(500).json(commonResponse(null, "server error"));
+      response.end();
+      return;
+    }
+
+    if (result.affectedRows === 0) {
+      response.status(404).json(commonResponse(null, "User tidak ditemukan"));
+      response.end();
+      return;
+    }
+
+    response.status(200).json({ success: "true", id: id });
+    response.end();
+  });
 });
 
 app.delete("/transaction/:id", (request, response) => {
@@ -248,7 +271,7 @@ app.delete("/transaction/:id", (request, response) => {
         .json(commonResponse(null, "Transaksi tidak ditemukan"));
       return;
     }
-    response.status(200).json({ id: id });
+    response.status(200).json({ success: "true", id: id });
     response.end();
   });
 });

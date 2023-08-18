@@ -25,12 +25,13 @@ This project provides a RESTful API built using Express.js and MySQL for managin
 
 ## API Endpoints
 
-| Method | Endpoint           | Description                      | Parameters / Body                                 |
-| ------ | ------------------ | -------------------------------- | ------------------------------------------------- |
-| GET    | `/users`           | Retrieve all users.              | None                                              |
-| GET    | `/users/:id`       | Fetch a specific user's details. | `id`: User ID                                     |
-| POST   | `/transaction`     | Create a new transaction.        | `user_id`, `type` (income/expense), `amount`      |
-| PUT    | `/transaction/:id` | Update an existing transaction.  | `id`: Transaction ID, `user_id`, `type`, `amount` |
-| DELETE | `/transaction/:id` | Delete a specific transaction.   | `id`: Transaction ID                              |
-
----.
+| Endpoint                | Method | Description                                                                            |
+| ----------------------- | ------ | -------------------------------------------------------------------------------------- |
+| `/users`                | GET    | Retrieves a list of all users.                                                         |
+| `/users/:id`            | GET    | Retrieves details of a specific user by ID, including their balance and total expense. |
+| `/transaction`          | GET    | Retrieves a list of all transactions.                                                  |
+| `/transaction/user/:id` | GET    | Retrieves all transactions for a specific user by their ID.                            |
+| `/transaction/:id`      | GET    | Retrieves details of a specific transaction by its ID.                                 |
+| `/transaction`          | POST   | Adds a new transaction.                                                                |
+| `/transaction/:id`      | PUT    | Updates a specific transaction by its ID.                                              |
+| `/transaction/:id`      | DELETE | Deletes a specific transaction by its ID.                                              |

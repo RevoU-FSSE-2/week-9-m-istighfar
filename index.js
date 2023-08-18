@@ -18,12 +18,12 @@ const commonResponse = function (data, error) {
   };
 };
 
-const mysqlCon = mysql.createPool({
-  host: process.env.MYSQL_HOST,
-  port: process.env.MYSQL_PORT,
-  user: process.env.MYSQL_USER,
-  password: process.env.MYSQL_PASS,
-  database: process.env.MYSQL_DB,
+const mysqlCon = mysql.createConnection({
+  host: "localhost",
+  port: "3306",
+  user: "root",
+  password: "1234",
+  database: "revouw9",
 });
 
 mysqlCon.connect((err) => {
@@ -38,7 +38,7 @@ app.get("/users", (request, response) => {
   const query = `SELECT
                         *
                  FROM
-                        revouw9.users`;
+                        users`;
 
   mysqlCon.query(query, (err, result, fields) => {
     if (err) {
@@ -72,7 +72,7 @@ app.get("/users/:id", (request, response) => {
                 ) as balance,
                 SUM(
                     CASE
-                        WHEN Transactions.type = 'expense' THEN transactions.amount
+                        WHEN transactions.type = 'expense' THEN transactions.amount
                         ELSE 0
                     END
                 ) as expense
@@ -99,6 +99,72 @@ app.get("/users/:id", (request, response) => {
     }
 
     response.status(200).json(result[0]);
+    response.end();
+  });
+});
+
+app.get("/transaction", (request, response) => {
+  const query = `SELECT * FROM transactions`;
+
+  mysqlCon.query(query, (err, result, fields) => {
+    if (err) {
+      console.error(err);
+      response.status(500).json(commonResponse(null, "server error"));
+      response.end();
+      return;
+    }
+
+    response.status(200).json(commonResponse(result, null));
+    response.end();
+  });
+});
+
+app.get("/transaction/user/:id", (request, response) => {
+  const id = request.params.id;
+  const query = `SELECT * FROM transactions WHERE user_id = ?`;
+
+  mysqlCon.query(query, [id], (err, result, fields) => {
+    if (err) {
+      console.error(err);
+      response.status(500).json(commonResponse(null, "server error"));
+      response.end();
+      return;
+    }
+
+    if (result.length === 0) {
+      response
+        .status(404)
+        .json(commonResponse(null, "Tidak ada transaksi pada id ini"));
+      response.end();
+      return;
+    }
+
+    response.status(200).json(commonResponse(result, null));
+    response.end();
+  });
+});
+
+app.get("/transaction/:id", (request, response) => {
+  const id = request.params.id;
+  const query = `SELECT * FROM transactions WHERE id = ?`;
+
+  mysqlCon.query(query, [id], (err, result, fields) => {
+    if (err) {
+      console.error(err);
+      response.status(500).json(commonResponse(null, "server error"));
+      response.end();
+      return;
+    }
+
+    if (result.length === 0) {
+      response
+        .status(404)
+        .json(commonResponse(null, "transaction tidak ditemukan"));
+      response.end();
+      return;
+    }
+
+    response.status(200).json(commonResponse(result[0], null));
     response.end();
   });
 });

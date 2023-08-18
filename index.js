@@ -19,11 +19,11 @@ const commonResponse = function (data, error) {
 };
 
 const mysqlCon = mysql.createConnection({
-  host: "localhost",
-  port: "3306",
+  host: "containers-us-west-137.railway.app",
+  port: "7771",
   user: "root",
-  password: "1234",
-  database: "revouw9",
+  password: "ZyciMOL2UsHkn0SIis5M",
+  database: "railway",
 });
 
 mysqlCon.connect((err) => {
@@ -226,29 +226,6 @@ app.put("/transaction/:id", (request, response) => {
       response.end();
     }
   );
-});
-
-app.delete("/users/:id", (request, response) => {
-  const id = request.params.id;
-  const query = `DELETE FROM users WHERE id = ?`;
-
-  mysqlCon.query(query, id, (err, result, fields) => {
-    if (err) {
-      console.error(err);
-      response.status(500).json(commonResponse(null, "server error"));
-      response.end();
-      return;
-    }
-
-    if (result.affectedRows === 0) {
-      response.status(404).json(commonResponse(null, "User tidak ditemukan"));
-      response.end();
-      return;
-    }
-
-    response.status(200).json({ success: "true", id: id });
-    response.end();
-  });
 });
 
 app.delete("/transaction/:id", (request, response) => {
